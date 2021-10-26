@@ -11,51 +11,63 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         let entity1 = document.querySelector("#entity-1");
+        let assets = document.querySelector("a-assets");
 
         // Write a function which creates all the attributes
         entity1.addEventListener("targetFound", (event) => {
-          console.log("target found");
-          // create and add elem
-          let video = document.createElement("a-video");
+          let elem = document.querySelector("#entity-1-video");
+          if (elem) {
+            elem.play();
+          } else {
+            console.log("target found");
+            // create and add elem
+            let aVideo = document.createElement("a-video");
+            let video = document.createElement("video");
 
-          let classOfVideo = document.createAttribute("class");
-          classOfVideo.value = "entity-1-video";
-          video.setAttributeNode(classOfVideo);
+            let width = document.createAttribute("width");
+            width.value = "1";
+            aVideo.setAttributeNode(width);
 
-          let width = document.createAttribute("width");
-          width.value = "1";
-          video.setAttributeNode(width);
+            let height = document.createAttribute("height");
+            height.value = "0.67";
+            aVideo.setAttributeNode(height);
 
-          let height = document.createAttribute("height");
-          height.value = "0.67";
-          video.setAttributeNode(height);
+            let position = document.createAttribute("position");
+            position.value = "0 0 0";
+            aVideo.setAttributeNode(position);
 
-          let loop = document.createAttribute("loop");
-          video.setAttributeNode(loop);
+            let srcOfVideo = document.createAttribute("src");
+            srcOfVideo.value = "#entity-1-video";
+            aVideo.setAttributeNode(srcOfVideo);
 
-          let src = document.createAttribute("src");
-          src.value =
-            "http://87.106.171.197:1337/uploads/Al_gran_sole_carico_d_amore_Trailer_ohne_Text_79a1872d8d.mp4";
-          video.setAttributeNode(src);
+            let idOfVideo = document.createAttribute("id");
+            idOfVideo.value = "entity-1-video";
+            video.setAttributeNode(idOfVideo);
 
-          let position = document.createAttribute("position");
-          position.value = "0 0 0";
-          video.setAttributeNode(position);
+            let loop = document.createAttribute("loop");
+            video.setAttributeNode(loop);
 
-          // let autoplay = document.createAttribute("autoplay");
-          // autoplay.value = "true";
-          // video.setAttributeNode(autoplay);
+            let src = document.createAttribute("src");
+            src.value =
+              "http://87.106.171.197:1337/uploads/Al_gran_sole_carico_d_amore_Trailer_ohne_Text_79a1872d8d.mp4";
+            video.setAttributeNode(src);
 
-          entity1.appendChild(video);
+            let autoplay = document.createAttribute("autoplay");
+            video.setAttributeNode(autoplay);
+
+            let crossOrigin = document.createAttribute("crossorigin");
+            crossOrigin.value = "anonymous";
+            video.setAttributeNode(crossOrigin);
+
+            assets.appendChild(video);
+            entity1.appendChild(aVideo);
+          }
         });
 
         entity1.addEventListener("targetLost", (event) => {
           console.log("target lost");
           // don't delete, pause elem
-          let video = document
-            .querySelector(".entity-1-video")
-            .getAttribute("src");
-          video.pause();
+          document.querySelector("#entity-1-video").pause();
         });
       });
     </script>
