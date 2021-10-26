@@ -1,27 +1,98 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image.prod.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let entity1 = document.querySelector("#entity-1");
+
+        // Write a function which creates all the attributes
+        entity1.addEventListener("targetFound", (event) => {
+          console.log("target found");
+          // create and add elem
+          let video = document.createElement("a-video");
+
+          let classOfVideo = document.createAttribute("class");
+          classOfVideo.value = "entity-1-video";
+          video.setAttributeNode(classOfVideo);
+
+          let width = document.createAttribute("width");
+          width.value = "1";
+          video.setAttributeNode(width);
+
+          let height = document.createAttribute("height");
+          height.value = "0.67";
+          video.setAttributeNode(height);
+
+          let loop = document.createAttribute("loop");
+          video.setAttributeNode(loop);
+
+          let src = document.createAttribute("src");
+          src.value =
+            "http://87.106.171.197:1337/uploads/Al_gran_sole_carico_d_amore_Trailer_ohne_Text_79a1872d8d.mp4";
+          video.setAttributeNode(src);
+
+          let position = document.createAttribute("position");
+          position.value = "0 0 0";
+          video.setAttributeNode(position);
+
+          // let autoplay = document.createAttribute("autoplay");
+          // autoplay.value = "true";
+          // video.setAttributeNode(autoplay);
+
+          entity1.appendChild(video);
+        });
+
+        entity1.addEventListener("targetLost", (event) => {
+          console.log("target lost");
+          // don't delete, pause elem
+          let video = document
+            .querySelector(".entity-1-video")
+            .getAttribute("src");
+          video.pause();
+        });
+      });
+    </script>
     <a-scene
       mindar-image="imageTargetSrc: ./ikarus.mind;"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
+      <a-assets></a-assets>
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane
+      <a-entity id="entity-1" mindar-image-target="targetIndex: 0">
+        <!-- <a-plane
           color="blue"
           opaciy="0.5"
           position="0 0 0"
-          height="0.552"
+          height="0.67"
           width="1"
           rotation="0 0 0"
-        ></a-plane>
+        ></a-plane> -->
+        <!-- <a-video
+          width="1"
+          height="0.67"
+          loop="false"
+          src="http://87.106.171.197:1337/uploads/Al_gran_sole_carico_d_amore_Trailer_ohne_Text_79a1872d8d.mp4"
+          position="0 0 0"
+        /> -->
       </a-entity>
     </a-scene>
   </body>
 </html>
+
+<!-- // detect target found
+    exampleTarget.addEventListener("targetFound", event => {
+      console.log("target found");
+    });
+
+    // detect target lost
+    exampleTarget.addEventListener("targetLost", event => {
+      console.log("target lost");
+    }); -->
