@@ -15,65 +15,65 @@
         let assets = document.querySelector("a-assets");
 
         // Write a function which creates all the attributes
-        entity1.addEventListener("targetFound", (event) => {
-          let elem = document.querySelector("#entity-1-video");
-          if (elem) {
-            elem.play();
-          } else {
-            console.log("target found");
-            // create and add elem
-            let aVideo = document.createElement("a-video");
-            let video = document.createElement("video");
+        // entity1.addEventListener("targetFound", (event) => {
+        //   let elem = document.querySelector("#entity-1-video");
+        //   if (elem) {
+        //     elem.play();
+        //   } else {
+        //     console.log("target found");
+        //     // create and add elem
+        //     let aVideo = document.createElement("a-video");
+        //     let video = document.createElement("video");
 
-            // Add the a-video tag inside a-entity
-            let width = document.createAttribute("width");
-            width.value = "1";
-            aVideo.setAttributeNode(width);
+        //     // Add the a-video tag inside a-entity
+        //     let width = document.createAttribute("width");
+        //     width.value = "1";
+        //     aVideo.setAttributeNode(width);
 
-            let height = document.createAttribute("height");
-            height.value = "0.67";
-            aVideo.setAttributeNode(height);
+        //     let height = document.createAttribute("height");
+        //     height.value = "0.67";
+        //     aVideo.setAttributeNode(height);
 
-            let position = document.createAttribute("position");
-            position.value = "0 0 0";
-            aVideo.setAttributeNode(position);
+        //     let position = document.createAttribute("position");
+        //     position.value = "0 0 0";
+        //     aVideo.setAttributeNode(position);
 
-            let srcOfVideo = document.createAttribute("src");
-            srcOfVideo.value = "#entity-1-video";
-            aVideo.setAttributeNode(srcOfVideo);
-            // End of <a-video>
+        //     let srcOfVideo = document.createAttribute("src");
+        //     srcOfVideo.value = "#entity-1-video";
+        //     aVideo.setAttributeNode(srcOfVideo);
+        //     // End of <a-video>
 
-            // Add the video tag inside assets for being able to control the video
-            let idOfVideo = document.createAttribute("id");
-            idOfVideo.value = "entity-1-video";
-            video.setAttributeNode(idOfVideo);
+        //     // Add the video tag inside assets for being able to control the video
+        //     let idOfVideo = document.createAttribute("id");
+        //     idOfVideo.value = "entity-1-video";
+        //     video.setAttributeNode(idOfVideo);
 
-            let loop = document.createAttribute("loop");
-            video.setAttributeNode(loop);
+        //     let loop = document.createAttribute("loop");
+        //     video.setAttributeNode(loop);
 
-            let src = document.createAttribute("src");
-            src.value =
-              "https://strapi.thecharacterforge.com/uploads/example_f1f25fc1af.mp4";
-            video.setAttributeNode(src);
+        //     let src = document.createAttribute("src");
+        //     src.value =
+        //       "https://strapi.thecharacterforge.com/uploads/example_f1f25fc1af.mp4";
+        //     video.setAttributeNode(src);
 
-            let autoplay = document.createAttribute("autoplay");
-            video.setAttributeNode(autoplay);
-            // End of <video>
+        //     let autoplay = document.createAttribute("autoplay");
+        //     video.setAttributeNode(autoplay);
+        //     // End of <video>
 
-            let crossOrigin = document.createAttribute("crossorigin");
-            crossOrigin.value = "anonymous";
-            video.setAttributeNode(crossOrigin);
+        //     let crossOrigin = document.createAttribute("crossorigin");
+        //     crossOrigin.value = "anonymous";
+        //     video.setAttributeNode(crossOrigin);
 
-            assets.appendChild(video);
-            entity1.appendChild(aVideo);
-          }
-        });
+        //     assets.appendChild(video);
+        //     entity1.appendChild(aVideo);
+        //   }
+        // });
 
-        entity1.addEventListener("targetLost", (event) => {
-          console.log("target lost");
-          // Pause video instead deleting it since the audio keeps playing
-          document.querySelector("#entity-1-video").pause();
-        });
+        // entity1.addEventListener("targetLost", (event) => {
+        //   console.log("target lost");
+        //   // Pause video instead deleting it since the audio keeps playing
+        //   document.querySelector("#entity-1-video").pause();
+        // });
       });
     </script>
     <a-scene
@@ -84,13 +84,14 @@
       <a-assets></a-assets>
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity id="entity-1" mindar-image-target="targetIndex: 0">
-        <!-- <a-video
+        <a-video
           width="1"
           height="0.67"
           loop="false"
-          src="http://87.106.171.197:1337/uploads/Al_gran_sole_carico_d_amore_Trailer_ohne_Text_79a1872d8d.mp4"
+          autoplay
+          src="https://strapi.thecharacterforge.com/uploads/example_f1f25fc1af.mp4"
           position="0 0 0"
-        /> -->
+        />
       </a-entity>
     </a-scene>
   </body>
